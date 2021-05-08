@@ -1,21 +1,14 @@
-import {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router';
+import Home from "./containers/pages/Home"
 
-const App=()=>{
-  const [persons, setPersons] = useState([])
-  useEffect( ()=>{
-    const f= async () =>{
-      const response = await axios.get("http://localhost:3000/posts");
-      setPersons(response.data)
-      console.log(response.data)
-    }
-    f();
-  },[])
-  return(
+const App = () => {
+  return( 
     <>
-      {persons.map(person =>(
-        <p>{person.id}</p>
-      ))}
+      <Routes>
+        <Route  path="/" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" replace />} />;
+      </Routes>
     </>
   )
 }
