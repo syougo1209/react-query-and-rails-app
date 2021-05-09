@@ -1,24 +1,28 @@
 
 import React from 'react';
-import { queryCache } from 'react-query';
+import { QueryClient } from 'react-query';
 import Home from 'components/pages/Home';
+import { getRecommendedCategories, getRecommededCategoriesExperiences, getRecommendedCategoriesUsers} from 'domains/home';
 
 const EnhancedHome=()=>{
+  const queryClient = new QueryClient()
   const getHomePageContentsForCategory = async (categoryIds) => {
     try{
       await Promise.all([
-        queryCache.prefetchQuery([categoryIds, 'recommendedUsers'], (ids) =>
+        queryClient.prefetchQuery([categoryIds, 'recommendedUsers'], (ids) =>
           getRecommendedCategoriesUsers(ids)
         ),
-        queryCache.prefetchQuery(['recommendedCategories'], (ids) =>
-          getRecommendCategories(ids)
+        queryClient.prefetchQuery(['recommendedCategories'], (ids) =>
+          getRecommendedCategories(ids)
         ),
-        queryCache.prefetchQuery([categoryIds[0], 'firstRecommendedCategoriesExperiences'], (ids) =>
-          getRecommededCategoriesExperiences(ids)
+        queryClient.prefetchQuery([categoryIds[0], 'firstRecommendedCategoriesExperiences'], (id) =>
+          getRecommededCategoriesExperiences(id)
         ),
-        queryCache.prefetchQuery([categoryIds[1], 'secondRecommendedCategoriesExperiences'], (ids) =>
-          getRecommededCategoriesExperiences(ids),
-          { enabled: categoryIds[1] }
+        queryClient.prefetchQuery([categoryIds[1], 'secondRecommendedCategoriesExperiences'], (id) =>
+          getRecommededCategoriesExperiences(id)
+        ),
+        queryClient.prefetchQuery([categoryIds[2], 'secondRecommendedCategoriesExperiences'], (id) =>
+          getRecommededCategoriesExperiences(id)
         ),
       ])
     } catch(error) {
@@ -29,17 +33,11 @@ const EnhancedHome=()=>{
   const getDefaultHomePageContents = async (categoryIds) => {
     try{
       await Promise.all([
-        queryCache.prefetchQuery([categoryIds, 'recommendedUsers'], (ids) =>
+        queryClient.prefetchQuery([categoryIds, 'recommendedUsers'], (ids) =>
           getRecommendedCategoriesUsers(ids)
         ),
-        queryCache.prefetchQuery(['recommendedCategories'], (ids) =>
-          getRecommendCategories(ids)
-        ),
-        queryCache.prefetchQuery([categoryIds[0], 'firstRecommendedCategoriesExperiences'], (ids) =>
-          getRecommededCategoriesExperiences(ids)
-        ),
-        queryCache.prefetchQuery([categoryIds[1], 'secondRecommendedCategoriesExperiences'], (ids) =>
-          getRecommededCategoriesExperiences(ids)
+        queryClient.prefetchQuery(['recommendedCategories'], (ids) =>
+          getRecommendedCategories(ids)
         ),
       ])
     } catch(error) {
@@ -47,13 +45,13 @@ const EnhancedHome=()=>{
     }
   };
   //配列の要素が一つの場合は[1]の要素がundefindedになることに注意
-  const recommendedCategoryIds = JSON.parse(localStorage.getItem("recommendedCategoryIds"))?.slice(0,2);
+  const recommendedCategoryIds = JSON.parse(localStorage.getItem("recommendedCategoryIds"))?.slice(0,3);
   const haveRecommendedCategoryIds = !!recommendedCategoryIds;
 
   if(haveRecommendedCategoryIds) {
     getHomePageContentsForCategory(recommendedCategoryIds)
   }else {
-    getDefaultHomePageContents()
+    getDefaultHomePageContents(recommendedCategoryIds)
   }
 
   const homePageProps = haveRecommendedCategoryIds ? {haveRecommendedCategoryIds, recommendedCategoryIds} : {haveRecommendedCategoryIds}
