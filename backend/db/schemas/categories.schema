@@ -1,0 +1,6 @@
+create_table "categories",id: :bigint, unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.string "title", limit: 100, null: false
+  t.text "description", limit: 10000, null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.datetime "created_at", precision: 6, null: false
+end

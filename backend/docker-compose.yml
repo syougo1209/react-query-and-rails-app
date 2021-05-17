@@ -12,6 +12,8 @@ services:
       - /var/tmp
       # socketファイルの共有
       - sockets:/app/tmp/sockets
+      - log-data:/var/log/nginx
+    stdin_open: true
     tty: true
     depends_on:
       - db
@@ -44,3 +46,5 @@ services:
 volumes:
   db_data:
   sockets:
+  log-data:
+    driver: local
