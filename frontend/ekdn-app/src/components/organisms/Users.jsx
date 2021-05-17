@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Users=({users})=>{
-  console.log(users)
   return (
     <>
       <p>users</p>

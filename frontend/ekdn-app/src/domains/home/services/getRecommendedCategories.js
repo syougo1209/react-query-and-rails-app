@@ -1,16 +1,12 @@
 import axios from 'domains/settings/axios'
 
 const getRecommendedCategories = async(ids)=>{
-  console.log(ids)
   const response = await axios.get('/categories/recommended_categories', {
     params: {
-        categoryIds: ids
+      categoryIds: ids
     }
   })
-  const categories = await response.data
-  console.log(categories)
-
-  return categories
+  return response.data.categories
 }
 
 export default getRecommendedCategories

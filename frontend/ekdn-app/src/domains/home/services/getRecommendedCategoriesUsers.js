@@ -6,9 +6,7 @@ const getRecommendedUsers = async(ids)=>{
       categoryIds: ids
     }
   })
-  const users = await response.data
-
-  return users
+  return response.data.users
 }
 
 export default getRecommendedUsers

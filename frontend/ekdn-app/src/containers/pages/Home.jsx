@@ -2,10 +2,11 @@
 import React from 'react';
 import { QueryClient } from 'react-query';
 import Home from 'components/pages/Home';
-import { getRecommendedCategories, getRecommededCategoriesExperiences, getRecommendedCategoriesUsers} from 'domains/home';
+import { getRecommendedCategories, getRecommendedCategoriesUsers} from 'domains/home';
 
 const EnhancedHome=()=>{
   const queryClient = new QueryClient()
+  /* ログイン機能を実装した時に一緒に実装する
   const getHomePageContentsForCategory = async (categoryIds) => {
     try{
       await Promise.all([
@@ -29,32 +30,34 @@ const EnhancedHome=()=>{
       console.log(error)
     }
   };
+  */
 
-  const getDefaultHomePageContents = async (categoryIds) => {
+  const getDefaultHomePageContents = async () => {
     try{
       await Promise.all([
-        queryClient.prefetchQuery([categoryIds, 'recommendedUsers'], (ids) =>
-          getRecommendedCategoriesUsers(ids)
+        queryClient.prefetchQuery([1, 'recommendedUsers'],
+          getRecommendedCategoriesUsers
         ),
-        queryClient.prefetchQuery(['recommendedCategories'], (ids) =>
-          getRecommendedCategories(ids)
+        queryClient.prefetchQuery([1,'recommendedCategories'],
+          getRecommendedCategories
         ),
       ])
     } catch(error) {
       console.log(error)
     }
   };
+  console.log("home")
   //配列の要素が一つの場合は[1]の要素がundefindedになることに注意
-  const recommendedCategoryIds = JSON.parse(localStorage.getItem("recommendedCategoryIds"))?.slice(0,3);
-  const haveRecommendedCategoryIds = !!recommendedCategoryIds;
+  //const recommendedCategoryIds = JSON.parse(localStorage.getItem("recommendedCategoryIds"))?.slice(0,3);
+  const haveRecommendedCategoryIds = false; //!!recommendedCategoryIds;
 
   if(haveRecommendedCategoryIds) {
-    getHomePageContentsForCategory(recommendedCategoryIds)
+    //getHomePageContentsForCategory(recommendedCategoryIds)
   }else {
-    getDefaultHomePageContents(recommendedCategoryIds)
+    getDefaultHomePageContents()
   }
 
-  const homePageProps = haveRecommendedCategoryIds ? {haveRecommendedCategoryIds, recommendedCategoryIds} : {haveRecommendedCategoryIds}
+  const homePageProps = {}//haveRecommendedCategoryIds ? {haveRecommendedCategoryIds, recommendedCategoryIds} : {haveRecommendedCategoryIds}
 
   return <Home {...homePageProps} />
 }
