@@ -18,6 +18,12 @@ Rails.application.routes.draw do
           get :recommended_categories_users
         end
       end
+
+      resources :session_logins, only: [:create, :destroy] do
+        collection do
+          get :current_user_id
+        end
+      end
     end
   end
 end

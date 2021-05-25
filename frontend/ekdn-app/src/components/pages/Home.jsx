@@ -1,25 +1,11 @@
-import React, { Suspense, useState } from 'react';
-import Modal from 'react-modal';
+import React, { Suspense } from 'react';
 
 import Categories from 'containers/organisms/Categories';
 import Users from 'containers/organisms/Users';
 import UserForm from 'components/organisms/UserForm'
 //import axios from 'domains/settings/axios'
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-Modal.setAppElement('body');
-
 const Home=(haveRecommendedCategoryIds, recommendedCategoryIds=[])=>{
-  const [modalIsOpen, setIsOpen]= useState(false);
   /*
   const handleSubmit = async (event) => {
      event.preventDefault();
@@ -42,14 +28,7 @@ const Home=(haveRecommendedCategoryIds, recommendedCategoryIds=[])=>{
       <Suspense fallback={<div>hello</div>}>
         <Users categoryIds={recommendedCategoryIds}/>
       </Suspense>
-      <button onClick={()=>setIsOpen(true)}>open</button>
-      <Modal
-       isOpen={modalIsOpen}
-       style={customStyles}
-      >
-        <button onClick={()=>setIsOpen(false)}>close</button>
-        <UserForm />
-      </Modal>
+      <UserForm />
     </>
   )
 }

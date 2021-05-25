@@ -6,7 +6,8 @@ module Api
         return render json: {}, status: :internal_server_error unless user.valid?
 
         user.save!
-        render json: {}, status: :created
+        login(user)
+        render json: {user_id: user.id}, status: :created
       end
 
       def recommended_categories_users
