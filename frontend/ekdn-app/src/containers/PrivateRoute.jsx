@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Navigate } from 'react-router';
 import getCurrentUserId from  'domains/getCurrentUserId'
 
-const PrivateRoute= ()=>{
+const PrivateRoute= ({children})=>{
   const data = useQuery(['currentUserId'], getCurrentUserId)
 
   const userId = data.data
@@ -12,7 +12,7 @@ const PrivateRoute= ()=>{
       {
         !data.isLoading &&
           (userId ?
-            <p>ohayo</p>
+            children
             : <Navigate to="/" />
           )
       }
