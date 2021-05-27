@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Input } from 'semantic-ui-react';
+import Modal from 'react-modal';
 
 import TextForm from 'components/molecules/TextForm'
+import axios from 'domains/settings/axios';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+Modal.setAppElement('body');
 
 const UserForm =()=>{
   const {register, handleSubmit, formState: { errors, isValid}} = useForm({mode: 'onChange'});
-  const onSubmit = data => console.log(data)
+  const [modalIsOpen, setIsOpen]= useState(false);
+  const onSubmit = async (data) => {
+    try {
+      await axios.post('/users',{
+        user: {...data}
+      })
+    } catch (error){
+      console.log(error.response)
+    }
+  }
 
   return (
     <>
-      <h1>user create</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextForm register={register} errors={errors} formTarget="userName" isRequired maxLength={20} />
-        <TextForm register={register} errors={errors} formTarget="email" isRequired maxLength={100} />
-        <TextForm register={register} errors={errors} formTarget="password" isRequired maxLength={100} />
-        <Input disabled={!isValid} type="submit"/>
-      </form>
+      {modalIsOpen ?
+        <Modal
+          isOpen={modalIsOpen}
+          style={customStyles}
+        >
+          <h1>user create</h1>
+          <button onClick={()=>setIsOpen(false)}>close</button>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextForm register={register} errors={errors} formTarget="name" isRequired maxLength={20} />
+            <TextForm register={register} errors={errors} formTarget="email" isRequired maxLength={100} />
+            <TextForm register={register} errors={errors} formTarget="password" isRequired maxLength={100} />
+            <Input disabled={!isValid} type="submit"/>
+          </form>
+        </Modal>
+        : <button onClick={()=>setIsOpen(true)}>新規登録</button>
+      }
     </>
   )
 }
