@@ -3,19 +3,9 @@ import { useForm } from "react-hook-form";
 import { Input } from 'semantic-ui-react';
 import Modal from 'react-modal';
 
-import TextForm from 'components/molecules/TextForm'
+import TextForm from 'components/molecules/form-component/TextForm'
 import axios from 'domains/settings/axios';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 Modal.setAppElement('body');
 
 const UserForm =()=>{
@@ -28,8 +18,21 @@ const UserForm =()=>{
       })
     } catch (error){
       console.log(error.response)
+    } finally {
+      window.location.reload();
     }
   }
+  const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+      width                 : '600px'
+    }
+  };
 
   return (
     <>
