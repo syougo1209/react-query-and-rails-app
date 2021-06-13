@@ -38,13 +38,13 @@ const UserForm =()=>{
           <Button onClick={()=>{setIsOpen(false)}}>close</Button>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Field>
-              <TextForm register={register} errors={errors} formTarget="name" isRequired maxLength={20} />
+              <TextForm register={register("name", { required: true, maxLength: 20})} errors={errors} formTarget="name"/>
             </Form.Field>
             <Form.Field>
-              <TextForm register={register} errors={errors} formTarget="email" isRequired maxLength={100} />
+              <TextForm register={register("email", { required: true, maxLength: 100})} errors={errors} formTarget="email"/>
             </Form.Field>
             <Form.Field>
-              <TextForm register={register} errors={errors} formTarget="password" isRequired maxLength={100} />
+              <TextForm register={register("password", { required: true, maxLength: 100})} errors={errors} formTarget="password"/>
             </Form.Field>
             <Input disabled={!isValid} type="submit"/>
           </Form>

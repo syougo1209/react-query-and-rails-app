@@ -29,6 +29,7 @@ const ExperienceForm =({})=>{
   return (
     <>
       <Modal
+        closeIcon
         onClose={() => setIsOpen(false)}
         onOpen={() => setIsOpen(true)}
         open={modalIsOpen}
@@ -39,13 +40,13 @@ const ExperienceForm =({})=>{
           <Button onClick={()=>setIsOpen(false)}>close</Button>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Field>
-              <TextForm register={register} errors={errors} formTarget="title" isRequired maxLength={20} />
+              <TextForm register={register("title", { required: true, maxLength: 100})} errors={errors} formTarget="title"/>
             </Form.Field>
             <Form.Field>
-              <TextForm register={register} errors={errors} formTarget="content" isRequired maxLength={100} />
+              <TextForm register={register("content", { required: true, maxLength: 20})} errors={errors} formTarget="content"/>
             </Form.Field>
             <Form.Field>
-              <SelectBox register={register} errors={errors} formTarget="categoryId" isRequired />
+              <SelectBox register={register("categoryId", { required: true})} errors={errors} formTarget="categoryId"/>
             </Form.Field>
             <Input disabled={!isValid} type="submit"/>
           </Form>
