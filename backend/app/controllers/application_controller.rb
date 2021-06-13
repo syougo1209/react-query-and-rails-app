@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
+  include LoginActions
   before_action :check_xhr_header
 
   def restrict_to_logged_in_user

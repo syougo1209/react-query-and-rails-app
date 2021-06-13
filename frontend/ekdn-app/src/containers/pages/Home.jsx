@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { QueryClient } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
 import Home from 'components/pages/Home';
 import { getRecommendedCategories, getRecommendedCategoriesUsers} from 'domains/home';
+import getCurrentUserId from  'domains/getCurrentUserId'
 
 const EnhancedHome=()=>{
   const queryClient = new QueryClient()
@@ -46,7 +47,7 @@ const EnhancedHome=()=>{
       console.log(error)
     }
   };
-  console.log("home")
+  const {data: userId=null} = useQuery(['currentUserId'], getCurrentUserId)
   //配列の要素が一つの場合は[1]の要素がundefindedになることに注意
   //const recommendedCategoryIds = JSON.parse(localStorage.getItem("recommendedCategoryIds"))?.slice(0,3);
   const haveRecommendedCategoryIds = false; //!!recommendedCategoryIds;
@@ -57,7 +58,7 @@ const EnhancedHome=()=>{
     getDefaultHomePageContents()
   }
 
-  const homePageProps = {}//haveRecommendedCategoryIds ? {haveRecommendedCategoryIds, recommendedCategoryIds} : {haveRecommendedCategoryIds}
+  const homePageProps = {userId}//haveRecommendedCategoryIds ? {haveRecommendedCategoryIds, recommendedCategoryIds} : {haveRecommendedCategoryIds}
 
   return <Home {...homePageProps} />
 }

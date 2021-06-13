@@ -2,10 +2,12 @@ import React, { Suspense } from 'react';
 
 import Categories from 'containers/organisms/Categories';
 import Users from 'containers/organisms/Users';
-import UserForm from 'components/organisms/UserForm'
+import UserForm from 'components/organisms/form/UserForm';
+import LoginForm from 'components/organisms/form/LoginForm'
+import ExperienceForm from 'components/organisms/form/ExperienceForm'
 //import axios from 'domains/settings/axios'
 
-const Home=(haveRecommendedCategoryIds, recommendedCategoryIds=[])=>{
+const Home=({userId, recommendedCategoryIds=[]})=>{
   /*
   const handleSubmit = async (event) => {
      event.preventDefault();
@@ -28,7 +30,9 @@ const Home=(haveRecommendedCategoryIds, recommendedCategoryIds=[])=>{
       <Suspense fallback={<div>hello</div>}>
         <Users categoryIds={recommendedCategoryIds}/>
       </Suspense>
-      <UserForm />
+      {!userId && <UserForm />}
+      {!userId && <LoginForm />}
+      {userId && <ExperienceForm /> }
     </>
   )
 }

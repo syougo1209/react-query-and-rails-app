@@ -1,3 +1,4 @@
-require 'experiences.schema'
 require 'categories.schema'
+require 'experiences.schema'
+require 'experience_categories.schema'
 require 'users.schema'
