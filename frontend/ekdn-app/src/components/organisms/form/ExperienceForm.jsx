@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
-import { Input } from 'semantic-ui-react';
-import Modal from 'react-modal';
+import { Input, Modal, Button, Form } from 'semantic-ui-react';
 
 import TextForm from 'components/molecules/form-component/TextForm';
 import SelectBox from 'components/molecules/form-component/SelectBox'
 import axios from 'domains/settings/axios';
 
-Modal.setAppElement('body');
-
-const ExperienceForm =({onCloseModal,formKey})=>{
+const ExperienceForm =({})=>{
   const {register, handleSubmit, formState: { errors, isValid}, reset} = useForm({mode: 'onChange'});
   const [modalIsOpen, setIsOpen]= useState(false);
   const onSubmit = async (data) => {
@@ -21,43 +18,39 @@ const ExperienceForm =({onCloseModal,formKey})=>{
     } catch (error){
       console.log(error.response)
     } finally {
-      
+      window.location.reload();
     }
   }
 
-  const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)',
-      width                 : '600px'
-    }
-  };
+  useEffect(()=>{
+    return ()=>reset()
+  },[modalIsOpen,reset])
 
   return (
     <>
-      {
-        modalIsOpen ? (
-          <Modal
-            isOpen={modalIsOpen}
-            style={customStyles}
-          >
-            <h1>experience create</h1>
-            <button onClick={()=>{reset(); setIsOpen(false)}}>close</button>
-            <form onSubmit={handleSubmit(onSubmit)}>
+      <Modal
+        onClose={() => setIsOpen(false)}
+        onOpen={() => setIsOpen(true)}
+        open={modalIsOpen}
+        trigger={<Button>体験を共有する</Button>}
+      >
+        <Modal.Header>experience create</Modal.Header>
+        <Modal.Content>
+          <Button onClick={()=>setIsOpen(false)}>close</Button>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Field>
               <TextForm register={register} errors={errors} formTarget="title" isRequired maxLength={20} />
+            </Form.Field>
+            <Form.Field>
               <TextForm register={register} errors={errors} formTarget="content" isRequired maxLength={100} />
+            </Form.Field>
+            <Form.Field>
               <SelectBox register={register} errors={errors} formTarget="categoryId" isRequired />
-              <Input disabled={!isValid} type="submit"/>
-            </form>
-          </Modal>
-        ) : (
-          <button onClick={()=>{setIsOpen(true)}}>体験を共有する</button>
-        )
-      }
+            </Form.Field>
+            <Input disabled={!isValid} type="submit"/>
+          </Form>
+        </Modal.Content>
+      </Modal>
     </>
   )
 }

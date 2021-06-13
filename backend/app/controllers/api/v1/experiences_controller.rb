@@ -4,7 +4,7 @@ module Api
       before_action :restrict_to_logged_in_user, only: %i[create]
 
       def create
-        experience= expericne_create
+        experience= experience_create
 
         if experience.present?
           render json: {}, status: :created
@@ -25,8 +25,8 @@ module Api
 
       def experience_create
         ActiveRecord::Base.transaction do
-          experience = Experience.create!(title: experience_params.slice(:title), content: experience_params.slice(:title), user_id: current_user.id)
-          ExperienceCategory.create!(experience_id: experience.id, category_id: experience_params.slice(:categoryId))
+          experience = Experience.create!(title: experience_params[:title], content: experience_params[:content], user_id: current_user.id)
+          ExperienceCategory.create!(experience_id: experience.id, category_id: experience_params[:categoryId])
 
           experience
         end

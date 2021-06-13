@@ -1,2 +1,2 @@
-class Experience < ApplicationRecord
+class ExperienceCategory < ApplicationRecord
 end

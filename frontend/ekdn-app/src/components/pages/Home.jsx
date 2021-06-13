@@ -2,7 +2,8 @@ import React, { Suspense } from 'react';
 
 import Categories from 'containers/organisms/Categories';
 import Users from 'containers/organisms/Users';
-import UserForm from 'components/organisms/form/UserForm'
+import UserForm from 'components/organisms/form/UserForm';
+import LoginForm from 'components/organisms/form/LoginForm'
 import ExperienceForm from 'components/organisms/form/ExperienceForm'
 //import axios from 'domains/settings/axios'
 
@@ -30,6 +31,7 @@ const Home=({userId, recommendedCategoryIds=[]})=>{
         <Users categoryIds={recommendedCategoryIds}/>
       </Suspense>
       {!userId && <UserForm />}
+      {!userId && <LoginForm />}
       {userId && <ExperienceForm /> }
     </>
   )
