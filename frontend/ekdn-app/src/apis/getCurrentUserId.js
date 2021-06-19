@@ -1,4 +1,4 @@
-import axios from 'domains/settings/axios'
+import axios from 'apis/settings/axios'
 
 const getCurrentUserId = async()=>{
   const response = await axios.get('/session_logins/current_user_id')

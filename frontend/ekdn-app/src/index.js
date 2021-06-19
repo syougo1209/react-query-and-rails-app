@@ -13,12 +13,10 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    shared: {
-      suspense: true
-    },
     queries: {
       retry: 0,
-      staleTime: 30000
+      suspense: true,
+      staleTime: 5 * 60 * 1000,
     },
   }
 })

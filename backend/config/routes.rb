@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :experiences, only: [:create] do
+      resources :experiences, only: [:create, :show] do
         collection do
           get :recommended_categories_experiences
         end
