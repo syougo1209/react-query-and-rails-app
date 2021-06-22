@@ -1,0 +1,8 @@
+create_table "access_categories",id: :bigint, unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.integer "user_id", null: false, unsigned: true
+  t.integer "category_id", null: false, unsigned: true
+  t.integer "access_count", null: false, unsigned: true
+  t.date "access_date", null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.datetime "created_at", precision: 6, null: false
+end

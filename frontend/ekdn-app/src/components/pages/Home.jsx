@@ -8,6 +8,7 @@ import ExperienceForm from 'components/organisms/form/ExperienceForm'
 //import axios from 'domains/settings/axios'
 
 const Home=({userId, recommendedCategoryIds=[]})=>{
+  console.log(userId)
   /*
   const handleSubmit = async (event) => {
      event.preventDefault();

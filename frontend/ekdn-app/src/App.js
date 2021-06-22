@@ -10,7 +10,9 @@ const App = () => {
   return( 
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Suspense fallback={<div>hello</div>}>
+          <Route path="/" element={<Home />} />
+        </Suspense>
         <Route path="/experiences" element={<Experiences/>}>
           <Route path=":experienceId" element={<DetailExperiencePage/>} />
         </Route>

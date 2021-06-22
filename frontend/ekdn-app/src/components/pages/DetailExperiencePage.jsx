@@ -1,4 +1,4 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense} from 'react';
 
 import DetailExperience from 'containers/organisms/DetailExperience';
 

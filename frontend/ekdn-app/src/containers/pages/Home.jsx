@@ -1,12 +1,13 @@
 
 import React from 'react';
-import { QueryClient, useQuery } from 'react-query';
+import { QueryClient, useQuery} from 'react-query';
 import Home from 'components/pages/Home';
 import { getRecommendedCategories, getRecommendedCategoriesUsers} from 'apis/home';
 import getCurrentUserId from  'apis/getCurrentUserId'
 
 const EnhancedHome=()=>{
   const queryClient = new QueryClient()
+  const {data: userId=null} = useQuery(['currentUserId'], getCurrentUserId)
   /* ログイン機能を実装した時に一緒に実装する
   const getHomePageContentsForCategory = async (categoryIds) => {
     try{
@@ -58,6 +59,6 @@ const EnhancedHome=()=>{
   }
 //haveRecommendedCategoryIds ? {haveRecommendedCategoryIds, recommendedCategoryIds} : {haveRecommendedCategoryIds}
 
-  return <Home/>
+  return <Home userId={userId}/>
 }
 export default EnhancedHome;
