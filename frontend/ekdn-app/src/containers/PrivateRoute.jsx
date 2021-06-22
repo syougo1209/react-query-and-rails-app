@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Navigate } from 'react-router';
-import getCurrentUserId from  'domains/getCurrentUserId'
+import getCurrentUserId from  'apis/getCurrentUserId'
 
 const PrivateRoute= ({children})=>{
   const {isLoading, data: userId=null} = useQuery(['currentUserId'], getCurrentUserId)

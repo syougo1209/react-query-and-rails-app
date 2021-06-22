@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Input, Modal, Button, Form } from 'semantic-ui-react';
 
 import TextForm from 'components/molecules/form-component/TextForm'
-import axios from 'domains/settings/axios';
+import axios from 'apis/settings/axios';
 
 const UserForm =()=>{
   const {register, handleSubmit, formState: {isValid, errors}, reset} = useForm({mode: 'onChange'});

@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :access_experience_categories, only: [:create] do
+      end
       resources :categories do
         collection do
           get :recommended_categories
         end
       end
 
-      resources :experiences, only: [:create] do
+      resources :experiences, only: [:create, :show] do
         collection do
           get :recommended_categories_experiences
         end

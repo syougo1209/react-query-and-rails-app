@@ -1,4 +1,4 @@
-import axios from 'domains/settings/axios'
+import axios from 'apis/settings/axios'
 
 const getRecommendedCategories = async(ids)=>{
   const response = await axios.get('/categories/recommended_categories', {

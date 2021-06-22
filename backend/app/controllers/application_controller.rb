@@ -7,6 +7,10 @@ class ApplicationController < ActionController::API
     return render_401_error if session[:user_id].blank?
   end
 
+  def response_404
+    render json: { error: 'not found' }, status: :not_found
+  end
+
   private 
 
   def check_xhr_header
@@ -15,6 +19,6 @@ class ApplicationController < ActionController::API
   end
 
   def render_401_error
-    render json: { message: "unauthorized" }, status: :unauthorized
+    render json: { error: "unauthorized" }, status: :unauthorized
   end
 end

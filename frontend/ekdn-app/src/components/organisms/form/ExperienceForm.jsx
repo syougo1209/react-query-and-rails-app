@@ -4,9 +4,9 @@ import { Input, Modal, Button, Form } from 'semantic-ui-react';
 
 import TextForm from 'components/molecules/form-component/TextForm';
 import SelectBox from 'components/molecules/form-component/SelectBox'
-import axios from 'domains/settings/axios';
+import axios from 'apis/settings/axios';
 
-const ExperienceForm =({})=>{
+const ExperienceForm =()=>{
   const {register, handleSubmit, formState: { errors, isValid}, reset} = useForm({mode: 'onChange'});
   const [modalIsOpen, setIsOpen]= useState(false);
   const onSubmit = async (data) => {
@@ -23,7 +23,7 @@ const ExperienceForm =({})=>{
   }
 
   useEffect(()=>{
-    return ()=>reset()
+    return ()=>{reset(); console.log("reset")}
   },[modalIsOpen,reset])
 
   return (

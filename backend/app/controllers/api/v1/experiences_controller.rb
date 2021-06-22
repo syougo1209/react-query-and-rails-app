@@ -13,6 +13,13 @@ module Api
         end
       end
 
+      def show
+        experience=Experience.find_by(id: params[:id])
+        return response_404 if experience.blank?
+
+        render json: {experience: experience.as_json(include: :user)}, status: :ok
+      end
+
       def recommended_categories_experiences
         render json: { experiences: Experience.all}
       end

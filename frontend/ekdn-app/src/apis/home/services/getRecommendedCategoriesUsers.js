@@ -1,4 +1,4 @@
-import axios from 'domains/settings/axios'
+import axios from 'apis/settings/axios'
 
 const getRecommendedUsers = async(ids)=>{
   const response = await axios.get('/users/recommended_categories_users', {
