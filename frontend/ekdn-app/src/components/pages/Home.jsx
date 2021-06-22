@@ -5,6 +5,7 @@ import Users from 'containers/organisms/Users';
 import UserForm from 'components/organisms/form/UserForm';
 import LoginForm from 'components/organisms/form/LoginForm'
 import ExperienceForm from 'components/organisms/form/ExperienceForm'
+import ErrorBoundary from 'ErrorBoundary';
 //import axios from 'domains/settings/axios'
 
 const Home=({userId, recommendedCategoryIds=[]})=>{
@@ -25,9 +26,11 @@ const Home=({userId, recommendedCategoryIds=[]})=>{
   return (
     <>
     <h1>Home</h1>
-      <Suspense fallback={<div>hello</div>}>
-        <Categories categoryIds={recommendedCategoryIds}/>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<div>hello</div>}>
+          <Categories categoryIds={recommendedCategoryIds}/>
+        </Suspense>
+      </ErrorBoundary>
       <Suspense fallback={<div>hello</div>}>
         <Users categoryIds={recommendedCategoryIds}/>
       </Suspense>
