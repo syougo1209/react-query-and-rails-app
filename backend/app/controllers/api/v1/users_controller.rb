@@ -4,7 +4,7 @@ module Api
       include LoginActions
       def create
         user=User.new(user_params)
-        return render json: {}, status: :internal_server_error unless user.valid?
+        return response_400
 
         user.save!
         login(user)

@@ -1,9 +1,8 @@
 import React from 'react';
 
-const SelectBox = ({register, errors, formTarget}) => {
+const SelectBox = ({register, errors, formTarget, selectOptions}) => {
 
-  //todo: selectListを親から呼ぶ
-  const selectOptions = [{value: 1, name: "恋愛"}, {value: 2, name: "料理"}]
+
   return (
     <>
       <label>{formTarget}</label>
