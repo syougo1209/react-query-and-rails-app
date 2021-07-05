@@ -1,13 +1,16 @@
 import React, {Suspense} from 'react';
 
 import DetailExperience from 'containers/organisms/DetailExperience';
+import ErrorBoundary from 'ErrorBoundary';
 
 const DetailExperiencePage=({experienceId})=>{
   return (
     <>
-    <Suspense fallback={<div>Loading</div>}>
-      <DetailExperience experienceId={experienceId}/>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading</div>}>
+        <DetailExperience experienceId={experienceId}/>
+      </Suspense>
+    </ErrorBoundary>
     </>
   )
 }
