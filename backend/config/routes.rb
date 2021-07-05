@@ -21,6 +21,12 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :recruitments, only: [:create, :destroy, :show] do
+        collection do
+          get :recommended_recruitments
+        end
+      end
+
       resources :session_logins, only: [:create, :destroy] do
         collection do
           get :current_user_id

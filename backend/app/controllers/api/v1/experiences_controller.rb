@@ -4,13 +4,9 @@ module Api
       before_action :restrict_to_logged_in_user, only: %i[create]
 
       def create
-        experience= experience_create
+        experience= current_user.create_experience(experience_params)
 
-        if experience.present?
-          render json: {}, status: :created
-        else
-          render json: {}, status: :internal_server_error
-        end
+        experience.present?  ? render(json: {}, status: :created) : response_400
       end
 
       def show
@@ -30,13 +26,8 @@ module Api
         params.require(:experience).permit(:title, :content, :categoryId)
       end
 
-      def experience_create
-        ActiveRecord::Base.transaction do
-          experience = Experience.create!(title: experience_params[:title], content: experience_params[:content], user_id: current_user.id)
-          ExperienceCategory.create!(experience_id: experience.id, category_id: experience_params[:categoryId])
-
-          experience
-        end
+      def response_201
+        render json: {}, status: :created
       end
     end
   end

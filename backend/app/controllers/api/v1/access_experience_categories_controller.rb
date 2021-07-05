@@ -9,13 +9,9 @@ module Api
 
         categories=experience.categories
 
-        is_succeeded=AccessCategory.create_and_update_today_access_category(categories: categories, user_id: current_user.id)
+        is_succeeded=UpdateAccessCategoryService.call(categories: categories, user: current_user)
 
-        if is_succeeded
-          render json: {}, status: :created
-        else
-          render json: {}, status: :internal_server_error
-        end
+        is_succeeded ? render(json: {}, status: :created) : response_400
       end
 
       private

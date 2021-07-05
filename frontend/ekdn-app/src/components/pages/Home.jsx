@@ -5,8 +5,8 @@ import Users from 'containers/organisms/Users';
 import UserForm from 'components/organisms/form/UserForm';
 import LoginForm from 'components/organisms/form/LoginForm'
 import ExperienceForm from 'components/organisms/form/ExperienceForm'
+import RecruitmentForm from 'components/organisms/form/RecruitmentForm';
 import ErrorBoundary from 'ErrorBoundary';
-//import axios from 'domains/settings/axios'
 
 const Home=({userId, recommendedCategoryIds=[]})=>{
   console.log(userId)
@@ -37,6 +37,7 @@ const Home=({userId, recommendedCategoryIds=[]})=>{
       {!userId && <UserForm />}
       {!userId && <LoginForm />}
       {userId && <ExperienceForm /> }
+      {userId && <RecruitmentForm /> }
     </>
   )
 }
