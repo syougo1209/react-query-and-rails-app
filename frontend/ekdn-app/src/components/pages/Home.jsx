@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
+import { Container } from 'semantic-ui-react';
 
-import Categories from 'containers/organisms/Categories';
-import Users from 'containers/organisms/Users';
 import Recruitments from 'containers/organisms/Recruitments';
 
 import UserForm from 'components/organisms/form/UserForm';
@@ -26,18 +25,18 @@ const Home=({userId})=>{
   };*/
 
   return (
-    <>
-    <h1>Home</h1>
-      <ErrorBoundary>
-        <Suspense fallback={<div>hello</div>}>
-          <Recruitments userId={userId}/>
-        </Suspense>
-      </ErrorBoundary>
-      {!userId && <UserForm />}
-      {!userId && <LoginForm />}
-      {userId && <ExperienceForm /> }
-      {userId && <RecruitmentForm /> }
-    </>
+    <Container>
+      <h1>Home</h1>
+        <ErrorBoundary>
+          <Suspense fallback={<div>hello</div>}>
+            <Recruitments userId={userId}/>
+          </Suspense>
+        </ErrorBoundary>
+        {!userId && <UserForm />}
+        {!userId && <LoginForm />}
+        {userId && <ExperienceForm /> }
+        {userId && <RecruitmentForm /> }
+    </Container>
   )
 }
 

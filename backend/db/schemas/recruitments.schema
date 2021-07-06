@@ -7,3 +7,5 @@ create_table "recruitments",id: :bigint, unsigned: true, force: :cascade, option
   t.datetime "updated_at", precision: 6, null: false
   t.datetime "created_at", precision: 6, null: false
 end
+
+add_index "recruitments", ["created_at"], name: "recruitments_created_at", using: :btree

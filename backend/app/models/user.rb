@@ -14,7 +14,7 @@ class User < ApplicationRecord
                                                    .where(category_id: category_ids)
                                                    .where(recruitments: { status: Recruitment.states[:recruiting]})
                                                    .order('recruitments.created_at DESC')
-                                                   .limit(limit+10)
+                                                   .limit(limit+10)#10件多く引けば自分以外の募集が引ける可能性が高くなるため
                                                    .pluck(:recruitment_id, :user_id)
 
     return nil unless categories_recruitment_ids
