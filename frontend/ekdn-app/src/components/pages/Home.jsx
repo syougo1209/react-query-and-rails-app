@@ -1,14 +1,15 @@
 import React, { Suspense } from 'react';
+import { Container } from 'semantic-ui-react';
 
-import Categories from 'containers/organisms/Categories';
-import Users from 'containers/organisms/Users';
+import Recruitments from 'containers/organisms/Recruitments';
+
 import UserForm from 'components/organisms/form/UserForm';
 import LoginForm from 'components/organisms/form/LoginForm'
 import ExperienceForm from 'components/organisms/form/ExperienceForm'
 import RecruitmentForm from 'components/organisms/form/RecruitmentForm';
 import ErrorBoundary from 'ErrorBoundary';
 
-const Home=({userId, recommendedCategoryIds=[]})=>{
+const Home=({userId})=>{
   console.log(userId)
   /*
   const handleSubmit = async (event) => {
@@ -24,21 +25,18 @@ const Home=({userId, recommendedCategoryIds=[]})=>{
   };*/
 
   return (
-    <>
-    <h1>Home</h1>
-      <ErrorBoundary>
-        <Suspense fallback={<div>hello</div>}>
-          <Categories categoryIds={recommendedCategoryIds}/>
-        </Suspense>
-      </ErrorBoundary>
-      <Suspense fallback={<div>hello</div>}>
-        <Users categoryIds={recommendedCategoryIds}/>
-      </Suspense>
-      {!userId && <UserForm />}
-      {!userId && <LoginForm />}
-      {userId && <ExperienceForm /> }
-      {userId && <RecruitmentForm /> }
-    </>
+    <Container>
+      <h1>Home</h1>
+        <ErrorBoundary>
+          <Suspense fallback={<div>hello</div>}>
+            <Recruitments userId={userId}/>
+          </Suspense>
+        </ErrorBoundary>
+        {!userId && <UserForm />}
+        {!userId && <LoginForm />}
+        {userId && <ExperienceForm /> }
+        {userId && <RecruitmentForm /> }
+    </Container>
   )
 }
 

@@ -4,4 +4,6 @@ class AccessCategory < ApplicationRecord
   validates :access_count, presence: true
   validates :access_date, presence: true
 
+  belongs_to :user
+  belongs_to :category
 end
