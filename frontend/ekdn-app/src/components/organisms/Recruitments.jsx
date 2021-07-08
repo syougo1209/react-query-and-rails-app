@@ -22,6 +22,7 @@ const EnhancedRecruitments=({recruitments})=>{
   const classes = useStyles();
   const navigate = useNavigate();
 
+  console.log(recruitments)
   return (
     <>
       <p>recruitments</p>
@@ -33,6 +34,7 @@ const EnhancedRecruitments=({recruitments})=>{
               <Card.Header size='huge' textAlign="center" className={classes.Header}>{recruitment.title}</Card.Header>
             </Card.Content>
             <Card.Content extra>
+              <p>{recruitment.user.name}</p>
               <Image
                 floated='right'
                 size='mini'
