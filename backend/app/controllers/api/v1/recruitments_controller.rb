@@ -13,10 +13,10 @@ module Api
         category_ids=current_user.today_recommended_categories.limit(limit).pluck(:id)
         return render json: {}, status: :ok if category_ids.blank?
 
-        recruitments=current_user.today_recommended_recruitments(category_ids: category_ids, limit: limit)
-        response_404 if recruitments.blank?
+        @recruitments=current_user.today_recommended_recruitments(category_ids: category_ids, limit: limit)
+        response_404 if @recruitments.blank?
 
-        render json: {recruitments: recruitments}, status: :ok
+        render 'recommended_recruitments', formats: :json, handlers: 'jbuilder', status: :ok
       end
 
       private

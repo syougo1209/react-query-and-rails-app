@@ -20,7 +20,7 @@ class User < ApplicationRecord
     return nil unless categories_recruitment_ids
 
      recruitment_ids= categories_recruitment_ids.lazy.select{|_,user_id| user_id!= id}.map{|recruitment_id ,_| recruitment_id}.first(limit)
-     Recruitment.where(id: recruitment_ids)
+     Recruitment.includes(:user).where(id: recruitment_ids)
   end
 
   def create_experience(experience_params)
