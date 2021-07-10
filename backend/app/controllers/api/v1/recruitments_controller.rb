@@ -2,6 +2,17 @@ module Api
   module V1
     class RecruitmentsController < ApplicationController
       before_action :restrict_to_logged_in_user, only: %i[create recommended_recruitments]
+
+      def show
+        @recruitment=Recruitment.find_by(id: params[:id])
+
+        response_404 unless @recruitment
+
+        response_404 if @recruitment.finished? || @recruitment.discarded?
+
+        render 'show', formats: :json, handlers: 'jbuilder', status: :ok
+      end
+
       def create
         recruitment=current_user.create_recruitment(recruitment_params)
 
