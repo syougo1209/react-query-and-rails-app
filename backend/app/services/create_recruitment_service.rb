@@ -25,7 +25,7 @@ class CreateRecruitmentService
     Recruitment.create!(
       title: @recruitment_params[:title],
       content: @recruitment_params[:content],
-      status: Recruitment.states[:recruiting],
+      status: Recruitment.statuses[:recruiting],
       recruitment_type: @recruitment_params[:recruitmentType],
       user_id: @user.id
     )

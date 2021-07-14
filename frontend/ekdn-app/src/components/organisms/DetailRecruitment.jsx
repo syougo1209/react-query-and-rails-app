@@ -1,10 +1,8 @@
 import React from 'react';
 import{ format } from 'date-fns'
 
-import { Container, Header, Image, Button, Popup} from 'semantic-ui-react'
+import { Container, Header, Image} from 'semantic-ui-react'
 import {createUseStyles} from 'react-jss'
-
-import BottomMenu from 'components/molecules/BottomMenu'
 
 const useStyles = createUseStyles({
   Title: {
@@ -14,7 +12,6 @@ const useStyles = createUseStyles({
     marginTop: '50px',
     lineHeight: '50px',
     fontSize: '20px',
-    height: '2000px'
   },
   Date: {
     fontSize: '13px',
@@ -24,9 +21,6 @@ const useStyles = createUseStyles({
     fontSize: '15px',
     margin: '0'
   },
-  BottomMenuComponent: {
-    marginLeft: '20px !important',
-  }
 })
 
 const DetailRecruitment=({recruitment})=>{
@@ -50,19 +44,6 @@ const DetailRecruitment=({recruitment})=>{
           </p>
         </Container>
       </Container>
-      <BottomMenu>
-        <Popup
-          content='このグチを聞く'
-          trigger={
-            <Button
-              circular
-              color='facebook'
-              icon='chat'
-              className={classes.BottomMenuComponent}
-            />
-          }
-        />
-      </BottomMenu>
     </>
   )
 }

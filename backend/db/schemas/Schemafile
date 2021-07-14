@@ -1,4 +1,6 @@
 require 'categories.schema'
+require 'chat_rooms.schema'
+require 'chat_room_users.schema'
 require 'experiences.schema'
 require 'experience_categories.schema'
 require 'users.schema'

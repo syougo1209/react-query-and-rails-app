@@ -6,6 +6,8 @@ import TextForm from 'components/molecules/form-component/TextForm';
 import SelectBox from 'components/molecules/form-component/SelectBox'
 import axios from 'apis/settings/axios';
 
+import { CATEGORY_OPTIONS } from 'constants/selectOptionConstants';
+
 const ExperienceForm =()=>{
   const {register, handleSubmit, formState: { errors, isValid}, reset} = useForm({mode: 'onChange'});
   const [modalIsOpen, setIsOpen]= useState(false);
@@ -46,7 +48,7 @@ const ExperienceForm =()=>{
               <TextForm register={register("content", { required: true, maxLength: 20})} errors={errors} formTarget="content"/>
             </Form.Field>
             <Form.Field>
-              <SelectBox register={register("categoryId", { required: true})} errors={errors} formTarget="categoryId"/>
+              <SelectBox register={register("categoryId", { required: true})} errors={errors} formTarget="categoryId" selectOptions={CATEGORY_OPTIONS}/>
             </Form.Field>
             <Input disabled={!isValid} type="submit"/>
           </Form>
