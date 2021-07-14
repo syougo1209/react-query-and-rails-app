@@ -12,7 +12,7 @@ class User < ApplicationRecord
   def today_recommended_recruitments(category_ids: ,limit:)
     categories_recruitment_ids= RecruitmentCategory.joins(:recruitment)
                                                    .where(category_id: category_ids)
-                                                   .where(recruitments: { status: Recruitment.states[:recruiting]})
+                                                   .where(recruitments: { status: Recruitment.statuses[:recruiting]})
                                                    .order('recruitments.created_at DESC')
                                                    .limit(limit+10)#10件多く引けば自分以外の募集が引ける可能性が高くなるため
                                                    .pluck(:recruitment_id, :user_id)

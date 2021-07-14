@@ -27,7 +27,19 @@ Rails.application.routes.draw do
         collection do
           get :recommended_recruitments
         end
+        resources :recruitment_chat_starts, only: [:create] do
+          collection do
+            post :confirm
+          end
+        end
+        resources :recruitment_chat_requests, only: [:create] do
+          collection do
+            post :confirm
+          end
+        end
       end
+
+
 
       resources :session_logins, only: [:create, :destroy] do
         collection do

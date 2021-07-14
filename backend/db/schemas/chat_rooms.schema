@@ -1,0 +1,6 @@
+create_table "chat_rooms",id: :bigint, unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.integer "recruitment_id", null: false, unsigned: true
+  t.integer "status", limit: 1, null: false, unsigned: true
+  t.datetime "updated_at", precision: 6, null: false
+  t.datetime "created_at", precision: 6, null: false
+end

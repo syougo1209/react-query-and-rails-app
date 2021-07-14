@@ -7,12 +7,12 @@ class ApplicationController < ActionController::API
     return render_401_error if session[:user_id].blank?
   end
 
-  def response_400
-    render json: { error: 'bad request' }, status: :bad_request
+  def response_400(error='bad request')
+    render json: { message: error }, status: :bad_request
   end
 
-  def response_404
-    render json: { error: 'not found' }, status: :not_found
+  def response_404(error)
+    render json: { message: error }, status: :not_found
   end
 
   private 

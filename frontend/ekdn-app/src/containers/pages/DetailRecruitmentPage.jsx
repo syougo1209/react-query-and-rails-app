@@ -6,11 +6,17 @@ import DetailRecruitmentPage from 'components/pages/DetailRecruitmentPage'
 import axios from 'apis/settings/axios';
 
 import getCurrentUserId from  'apis/getCurrentUserId'
+import getDetailRecruitment from 'apis/recruitment/getDetailRecruitment';
 
 const EnhancedDetailExperiencePage=()=>{
-  const { data: userId=null} = useQuery(['currentUserId'], getCurrentUserId, { suspense: false })
   const { recruitmentId } = useParams();
 
+  const { data: userId=null} = useQuery(['currentUserId'], getCurrentUserId)
+  const { data: recruitment }=useQuery([recruitmentId, 'detailRecruitment'], ()=>getDetailRecruitment(recruitmentId), {
+    enabled: Number.isInteger(parseInt(recruitmentId)) && !!userId})
+
+    console.log(userId)
+    console.log(recruitment)
   if (!Number.isInteger(parseInt(recruitmentId))) return <Navigate to="/" replace />
 
   //todo userが気になったカテゴリーを作成するための処理
@@ -24,7 +30,7 @@ const EnhancedDetailExperiencePage=()=>{
     }
   }
 
-  return <DetailRecruitmentPage recruitmentId={recruitmentId} userId={userId}/>
+  return <DetailRecruitmentPage recruitment={recruitment} userId={userId}/>
 }
 
 export default EnhancedDetailExperiencePage
