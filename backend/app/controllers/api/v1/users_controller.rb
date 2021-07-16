@@ -4,7 +4,7 @@ module Api
       include LoginActions
       def create
         user=User.new(user_params)
-        return response_400
+        return response_400 if user.invalid?
 
         user.save!
         login(user)

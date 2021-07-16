@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {useMutation} from 'react-query'
+import {Link} from 'react-router-dom'
 
 import {Button, Modal, Icon} from 'semantic-ui-react'
-import {createUseStyles} from 'react-jss'
 
 import axios from 'apis/settings/axios';
 
 const CreateChatRequestModal=({modalIsOpen, setModalIsOpen, modalMessage, setModalMessage, canCreate,setCanCreate, recruitment})=>{
   const [isCreatePosting, setIsCreatePosting]=useState(false)
+  const [chatRoomId, setChatRoomId]=useState(null)
 
   const CreateRequestMutate= useMutation((recruitmentId) =>axios.post(`recruitments/${recruitmentId}/recruitment_chat_starts`), {
     onMutate: ()=>{
@@ -18,9 +19,11 @@ const CreateChatRequestModal=({modalIsOpen, setModalIsOpen, modalMessage, setMod
       setModalMessage(error.response.data.message)
     },
     onSuccess: (data)=>{
-      console.log(data)
       setModalIsOpen(true)
+      console.log(data.data.chat_room_id)
       setModalMessage("グチチャットのルームを作成しました")
+      setChatRoomId(data.data.chat_room_id)
+      console.log(chatRoomId)
     },
     onSettled: ()=>{
       setCanCreate(false)
@@ -42,9 +45,10 @@ const CreateChatRequestModal=({modalIsOpen, setModalIsOpen, modalMessage, setMod
       >
           <Modal.Header>チャットに参加する</Modal.Header>
           <Modal.Content>
-          <Modal.Description>
-          {modalMessage}
-          </Modal.Description>
+            <Modal.Description>
+              {modalMessage}
+              { chatRoomId && <Link to="/home">リンクをクリック</Link>}
+            </Modal.Description>
           </Modal.Content>
           { canCreate &&
           <Modal.Actions>

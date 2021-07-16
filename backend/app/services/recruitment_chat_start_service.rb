@@ -12,14 +12,14 @@ class RecruitmentChatStartService
   def call
     return unless recruitment.recruiting?
 
-    is_succeeded=ActiveRecord::Base.transaction do
+    chat_room=ActiveRecord::Base.transaction do
       update_recruitment_status!
-      create_chat_room!
+      chat_room=create_chat_room!
 
-      true
+      chat_room
     end
 
-    is_succeeded
+    chat_room
   end
 
   private
@@ -34,5 +34,7 @@ class RecruitmentChatStartService
   def create_chat_room!
     chat_room=ChatRoom.create!(recruitment_id: @recruitment.id)
     ChatRoomUser.create!(user_id: @user.id, chat_room_id: chat_room.id)
+
+    chat_room
   end
 end

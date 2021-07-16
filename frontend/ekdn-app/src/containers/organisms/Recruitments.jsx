@@ -6,7 +6,7 @@ import Recruitments from 'components/organisms/Recruitments'
 
 const EnhancedRecruitments=({userId})=>{
   const {data: recommendedRecruitments=[]}=useQuery(
-    userId && ["recommendedRecruitments", { userId: userId}],
+    userId && ["recommendedRecruitments"],
      getRecommendedRecruitments
   )
   return <Recruitments recruitments={recommendedRecruitments} />

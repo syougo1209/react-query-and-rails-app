@@ -55,7 +55,9 @@ const DetailRecruitmentPage=({recruitment, userId})=>{
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         modalMessage={modalMessage}
+        setModalMessage={setModalMessage}
         canCreate={canCreate}
+        setCanCreate={setCanCreate}
         recruitment={recruitment}
       />
      {userId &&

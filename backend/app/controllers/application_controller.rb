@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
     render json: { message: error }, status: :bad_request
   end
 
-  def response_404(error)
+  def response_404(error='not found')
     render json: { message: error }, status: :not_found
   end
 
