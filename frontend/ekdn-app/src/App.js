@@ -14,8 +14,6 @@ import Recruitments from "./components/pages/root/Recruitments"
 import ChatRooms from "./components/pages/root/ChatRooms"
 import Users from "./components/pages/root/Users"
 
-import ErrorBoundary from 'ErrorBoundary';
-
 const App = () => {
   return( 
     <>
@@ -29,10 +27,10 @@ const App = () => {
         <Route path="/recruitments" element={<Recruitments />} >
         <Route path=":recruitmentId" element={<DetailRecruitmentPage/>} />
         </Route>
-        <PrivateRoute>
           <Route path="/users" element={<Users />}>
             <Route  path=":userId" element={<User/>} />
           </Route>
+        <PrivateRoute>
           <Route path="/chat_rooms" element={<ChatRooms/>}>
             <Route path=":chatRoomId" element={<DetailChatRoomPage/>} />
           </Route>

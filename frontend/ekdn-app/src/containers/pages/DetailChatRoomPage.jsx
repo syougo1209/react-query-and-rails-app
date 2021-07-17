@@ -9,7 +9,6 @@ import getDetailChatRoom from  'apis/chatRoom/getDetailChatRoom'
 
 const EnhancedDetailChatRoomPage=()=>{
   const { chatRoomId } = useParams();
-  console.log("chatROom")
 
   const { data: chatRoom }=useQuery([chatRoomId, 'detailChatRoom'], ()=>getDetailChatRoom(chatRoomId), {
     enabled: Number.isInteger(parseInt(chatRoomId))})

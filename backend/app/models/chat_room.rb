@@ -22,4 +22,8 @@ class ChatRoom < ApplicationRecord
   def organizer
     recruitment.user
   end
+
+  def can_access?(accessing_user)
+    users.include?(accessing_user)
+  end
 end
