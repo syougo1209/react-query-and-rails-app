@@ -18,11 +18,10 @@ const useStyles = createUseStyles({
   }
 })
 
-const EnhancedRecruitments=({recruitments})=>{
+const Recruitments=({recruitments})=>{
   const classes = useStyles();
   const navigate = useNavigate();
 
-  console.log(recruitments)
   return (
     <>
       <p>recruitments</p>
@@ -49,4 +48,4 @@ const EnhancedRecruitments=({recruitments})=>{
   )
 }
 
-export default EnhancedRecruitments
+export default Recruitments

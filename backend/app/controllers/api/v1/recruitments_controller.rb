@@ -6,9 +6,9 @@ module Api
       def show
         @recruitment=Recruitment.find_by(id: params[:id])
 
-        response_404 unless @recruitment
+        return response_404 unless @recruitment
 
-        response_404 if @recruitment.finished? || @recruitment.discarded?
+        return response_404 if @recruitment.finished? || @recruitment.discarded?
 
         render 'show', formats: :json, handlers: 'jbuilder', status: :ok
       end
@@ -19,13 +19,15 @@ module Api
         recruitment.present? ? render(json: {}, status: :created) : response_400
       end
 
+      #todo なければ404や[]ではなく他のものを返す
       def recommended_recruitments
         limit=6
-        category_ids=current_user.today_recommended_categories.limit(limit).pluck(:id)
-        return render json: {}, status: :ok if category_ids.blank?
+        category_ids=current_user.today_recommended_categories.limit(limit).pluck(:id).uniq
+        return render json: [], status: :ok if category_ids.blank?
 
         @recruitments=current_user.today_recommended_recruitments(category_ids: category_ids, limit: limit)
-        response_404 if @recruitments.blank?
+
+        return response_404 if @recruitments.blank?
 
         render 'recommended_recruitments', formats: :json, handlers: 'jbuilder', status: :ok
       end

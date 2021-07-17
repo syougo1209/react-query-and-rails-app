@@ -18,8 +18,8 @@ module Api
         return response_404 unless recruitment
         return response_400(RECRUITING_FINISHED_ERROR_MESSAGE) if !recruitment.recruiting? || !recruitment.one_fast_type?
 
-        is_succeeded=RecruitmentChatStartService.call(user: current_user, recruitment: recruitment)
-        is_succeeded ? render(json: {}, status: :created) : response_400
+        chat_room=RecruitmentChatStartService.call(user: current_user, recruitment: recruitment)
+        chat_room ? render(json: {chat_room_id: chat_room.id}, status: :created) : response_400
       end
     end
   end
