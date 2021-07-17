@@ -18,7 +18,7 @@ class ErrorBoundary extends PureComponent {
     if (hasError) {
       return (
         <>
-        <div>error</div>
+          <div>error</div>
         </>
       )
     }

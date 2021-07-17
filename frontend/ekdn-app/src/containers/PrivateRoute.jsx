@@ -4,7 +4,7 @@ import { Navigate } from 'react-router';
 import getCurrentUserId from  'apis/getCurrentUserId'
 
 const PrivateRoute= ({children})=>{
-  const {isLoading, data: userId=null} = useQuery(['currentUserId'], getCurrentUserId)
+  const {isLoading, data: userId=null} = useQuery(['currentUserId'], getCurrentUserId, {suspense: false})
 
   return (
     <>

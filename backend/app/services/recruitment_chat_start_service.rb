@@ -33,7 +33,14 @@ class RecruitmentChatStartService
 
   def create_chat_room!
     chat_room=ChatRoom.create!(recruitment_id: @recruitment.id)
-    ChatRoomUser.create!(user_id: @user.id, chat_room_id: chat_room.id)
+    users=[recruitment.user, @user]
+
+    chat_rooms=users.map do |user|
+      ChatRoomUser.new(user_id: user.id, chat_room_id: chat_room.id)
+    end
+
+    result=ChatRoomUser.import chat_rooms
+    raise ActiveRecord::Rollback if result.failed_instances.present?
 
     chat_room
   end

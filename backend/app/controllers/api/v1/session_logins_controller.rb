@@ -6,7 +6,7 @@ module Api
 
       def create
         user = User.find_by(email: session_login_params[:email])
-        return render_401_error unless user&.authenticate(session_login_params[:password])
+        return response_401 unless user&.authenticate(session_login_params[:password])
 
         login(user)
         render json: {userId: user.id}, status: :ok

@@ -8,6 +8,7 @@ class Recruitment < ApplicationRecord
   validates :recruitment_type, numericality: { only_integer: true }
 
   belongs_to :user
+  has_one :chat_room
   has_many :recruitment_categories
   has_many :categories, through: :recruitment_categories
 
