@@ -9,7 +9,7 @@ module Api
         recruitment=Recruitment.find_by(id: params[:recruitment_id])
 
         return response_404 unless recruitment
-        return response_400(RECRUITING_FINISHED_ERROR_MESSAGE) if !recruitment.recruiting? || !recruitment.one_fast_type?
+        return response_400 if !recruitment.recruiting? || !recruitment.one_fast_type?
         render json: {}, status: :ok
       end
 

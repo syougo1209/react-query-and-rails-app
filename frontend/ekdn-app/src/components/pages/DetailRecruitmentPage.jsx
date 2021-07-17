@@ -10,32 +10,28 @@ import {createUseStyles} from 'react-jss'
 
 import axios from 'apis/settings/axios';
 
+import { CREATE_CHAT_MODAL_STATUS } from 'constants/modalStatus'
+
 const useStyles = createUseStyles({
   BottomMenuComponent: {
     marginLeft: '20px !important',
   }
 })
 
+
 const DetailRecruitmentPage=({recruitment, userId})=>{
-  const [modalIsOpen, setModalIsOpen]=useState(false)
-  const [modalMessage, setModalMessage] = useState('')
+  const [modalStatus, setModalStatus]=useState(CREATE_CHAT_MODAL_STATUS.notDisplay)
   const [isPosting, setIsPosting] = useState(false)
-  const [canCreate, setCanCreate] = useState(false)
 
   const ConfirmRequestMutate = useMutation((recruitmentId) =>axios.post(`recruitments/${recruitmentId}/recruitment_chat_starts/confirm`), {
     onMutate: ()=>{
       setIsPosting(true)
     },
-    onError: (error)=>{
-      setModalIsOpen(true)
-      setModalMessage(error.response.data.message)
-      setCanCreate(false)
+    onError: ()=>{
+      setModalStatus(CREATE_CHAT_MODAL_STATUS.confirmModalError)
     },
-    onSuccess: (data)=>{
-      console.log(data)
-      setModalIsOpen(true)
-      setModalMessage("この募集の作成者のグチを聞きますか?")
-      setCanCreate(true)
+    onSuccess: ()=>{
+      setModalStatus(CREATE_CHAT_MODAL_STATUS.displayConfirmModal)
     },
     onSettled: ()=>{
       setIsPosting(false)
@@ -52,12 +48,8 @@ const DetailRecruitmentPage=({recruitment, userId})=>{
       <DetailRecruitment recruitmentId={recruitment.id}/>
 
       <CreateRecruitmentChatModal
-        modalIsOpen={modalIsOpen}
-        setModalIsOpen={setModalIsOpen}
-        modalMessage={modalMessage}
-        setModalMessage={setModalMessage}
-        canCreate={canCreate}
-        setCanCreate={setCanCreate}
+        modalStatus={modalStatus}
+        setModalStatus={setModalStatus}
         recruitment={recruitment}
       />
      {userId &&
