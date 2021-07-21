@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { Container } from 'semantic-ui-react'
+
+import ChatRoomHeader from 'containers/atoms/ChatRoomHeader'
+
 const EnhancedDetailChatRoomPage=({chatRoom})=>{
   return (
-  <div>
-    {chatRoom.id}
-  </div>)
+  <Container>
+    <ChatRoomHeader/>
+  </Container>)
 }
 
 export default EnhancedDetailChatRoomPage

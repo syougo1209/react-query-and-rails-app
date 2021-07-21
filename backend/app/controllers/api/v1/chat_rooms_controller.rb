@@ -6,7 +6,7 @@ module Api
 
       def show
         @messages = Message.includes(:user).where(chat_room_id: params[:id]).order(created_at: :desc)
-        render 'show', formats: :json, handlers: 'jbuilder', status: :ok
+        render json: @chat_room.as_json(include: { recruitment: {only: :title}}), status: :ok
       end
 
       private
