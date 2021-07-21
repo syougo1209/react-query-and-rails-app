@@ -13,10 +13,8 @@ const EnhancedDetailExperiencePage=()=>{
 
   const { data: userId=null} = useQuery(['currentUserId'], getCurrentUserId)
   const { data: recruitment }=useQuery([recruitmentId, 'detailRecruitment'], ()=>getDetailRecruitment(recruitmentId), {
-    enabled: Number.isInteger(parseInt(recruitmentId)) && !!userId})
+    enabled: Number.isInteger(parseInt(recruitmentId))})
 
-    console.log(userId)
-    console.log(recruitment)
   if (!Number.isInteger(parseInt(recruitmentId))) return <Navigate to="/" replace />
 
   //todo userが気になったカテゴリーを作成するための処理

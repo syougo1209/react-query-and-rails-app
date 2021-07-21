@@ -4,8 +4,8 @@ import { Outlet } from 'react-router';
 const Experiences=()=>{
   return (
   <>
-  <header>体験を共有</header>
-  <Outlet />
+    <header>体験を共有</header>
+    <Outlet />
   </>)
 }
 

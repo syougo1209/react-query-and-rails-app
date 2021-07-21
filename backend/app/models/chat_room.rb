@@ -3,6 +3,10 @@ class ChatRoom < ApplicationRecord
 
   validates :recruitment_id, presence: true
 
+  belongs_to :recruitment
+  has_many :chat_room_users
+  has_many :users, through: :chat_room_users
+
   enum status: {
     starting: 1,
     stop_recruiting: 2,
@@ -13,5 +17,13 @@ class ChatRoom < ApplicationRecord
     state :starting, initial: true
     state :stop_recruiting
     state :finished
+  end
+
+  def organizer
+    recruitment.user
+  end
+
+  def can_access?(accessing_user)
+    users.include?(accessing_user)
   end
 end

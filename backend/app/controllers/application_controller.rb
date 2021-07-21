@@ -4,11 +4,15 @@ class ApplicationController < ActionController::API
   before_action :check_xhr_header
 
   def restrict_to_logged_in_user
-    return render_401_error if session[:user_id].blank?
+    return response_401 if session[:user_id].blank?
   end
 
   def response_400(error='bad request')
     render json: { message: error }, status: :bad_request
+  end
+
+  def response_401
+    render json: { error: "unauthorized" }, status: :unauthorized
   end
 
   def response_404(error='not found')
@@ -20,9 +24,5 @@ class ApplicationController < ActionController::API
   def check_xhr_header
     return if request.xhr?
     render json: { error: 'forbidden' }, status: :forbidden
-  end
-
-  def render_401_error
-    render json: { error: "unauthorized" }, status: :unauthorized
   end
 end

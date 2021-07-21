@@ -16,7 +16,8 @@ module Api
       def create
         recruitment=Recruitment.find_by(id: params[:recruitment_id])
         return response_404 unless recruitment
-        return response_400(RECRUITING_FINISHED_ERROR_MESSAGE) if !recruitment.recruiting? || !recruitment.one_fast_type?
+        return response_400 if recruitment.user.id == recruitment.user_id
+        return response_400 if !recruitment.recruiting? || !recruitment.one_fast_type?
 
         chat_room=RecruitmentChatStartService.call(user: current_user, recruitment: recruitment)
         chat_room ? render(json: {chat_room_id: chat_room.id}, status: :created) : response_400
