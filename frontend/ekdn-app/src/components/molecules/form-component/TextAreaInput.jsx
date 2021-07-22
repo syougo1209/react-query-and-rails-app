@@ -1,14 +1,17 @@
 import React from 'react';
-import { Input, Message } from 'semantic-ui-react';
+import { TextArea, Message } from 'semantic-ui-react';
 
-const TextForm = ({register, errors, formTarget, showValidation}) => {
+const DEFAULT_TEXT_AREA_HEIGHT=100
 
-  console.log(errors[formTarget])
+const TextAreaInput = ({register, errors, formTarget, showValidation}) => {
+
   return (
     <>
       <label>{formTarget}</label>
-      <Input
+      <TextArea
         {...register}
+        style={{ minHeight: DEFAULT_TEXT_AREA_HEIGHT }}
+        placeholder='Tell us more'
       />
       {showValidation && errors[formTarget] &&
         <Message
@@ -21,4 +24,4 @@ const TextForm = ({register, errors, formTarget, showValidation}) => {
   )
 }
 
-export default TextForm
+export default TextAreaInput
