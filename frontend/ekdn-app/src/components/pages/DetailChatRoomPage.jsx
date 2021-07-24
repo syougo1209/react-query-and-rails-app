@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import { Container, Grid, Divider } from 'semantic-ui-react'
+import { Container, Grid} from 'semantic-ui-react'
 
 import ChatRoomHeader from 'containers/atoms/ChatRoomHeader'
 import ChatRoomMessages from 'containers/organisms/ChatRoomMessages'

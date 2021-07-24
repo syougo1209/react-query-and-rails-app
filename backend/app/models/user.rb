@@ -30,4 +30,8 @@ class User < ApplicationRecord
   def create_recruitment(recruitment_params)
     CreateRecruitmentService.call(user: self, recruitment_params: recruitment_params)
   end
+
+  def create_message(content: , chat_room:)
+    CreateMessageService.call(user: self, content: content, chat_room: chat_room)
+  end
 end

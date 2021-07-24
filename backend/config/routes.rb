@@ -22,6 +22,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :messages, only: [:create]
+
       resources :users, only: [:create] do
         collection do
           get :recommended_categories_users

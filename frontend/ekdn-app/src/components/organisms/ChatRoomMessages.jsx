@@ -1,18 +1,21 @@
 import React from 'react';
 
+import { Item } from 'semantic-ui-react'
 import {ChatRoomText} from 'constants/Text'
 
-const EnhancedChatRoomMessages=({messages})=>{
+import MessageItem from 'components/molecules/MessageItem'
+
+const EnhancedChatRoomMessages=({messages, userId})=>{
 
   return (
-    <>
+    <Item.Group>
     {messages.length ? messages.map((message)=>{
       return (
-        <p>{message.content}</p>
+          <MessageItem message={message} isMyMessage={message.user.id === userId} />
       )
     }) :
     <p>{ChatRoomText.NO_MESSAGES}</p>}
-    </>
+    </Item.Group>
   )
 }
 

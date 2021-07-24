@@ -1,5 +1,5 @@
 import React from 'react';
-import{ format } from 'date-fns'
+import {formatDateTime} from 'helpers/DateTimeHelper'
 
 import { Container, Header, Image} from 'semantic-ui-react'
 import {createUseStyles} from 'react-jss'
@@ -36,7 +36,7 @@ const DetailRecruitment=({recruitment})=>{
             src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
           />
           <p className={classes.UserName}>{recruitment.user.name}</p>
-          <p className={classes.Date}>{format(new Date(recruitment.created_at),'yyyy年MM月dd日 HH時mm分')}</p>
+          <p className={classes.Date}>{formatDateTime(recruitment.created_at)}</p>
         </Container>
         <Container textAlign='center' className={classes.Content}>
           <p>

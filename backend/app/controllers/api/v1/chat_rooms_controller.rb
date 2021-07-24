@@ -15,7 +15,7 @@ module Api
         @messages = Message.includes(:user).where(chat_room_id: params[:id]).order(created_at: :desc)
         render json: @messages.as_json(
           include: {
-            users: { only: %i[id name] }
+            user: { only: %i[id name] }
           }
         )
       end
@@ -23,6 +23,7 @@ module Api
 
       private
 
+      #todo 共通化
       def check_valid_access
         @chat_room=ChatRoom.find_by(id: params[:id])
         return response_404 if !@chat_room || !@chat_room.starting?
