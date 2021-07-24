@@ -10,13 +10,19 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :chat_rooms, only: [:show]
+      resources :chat_rooms, only: [:show] do
+        member do
+          get :messages
+        end
+      end
 
       resources :experiences, only: [:create, :show] do
         collection do
           get :recommended_categories_experiences
         end
       end
+
+      resources :messages, only: [:create]
 
       resources :users, only: [:create] do
         collection do
